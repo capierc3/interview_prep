@@ -5,14 +5,30 @@ import java.util.*;
 public class Leet {
 
     public static void main(String[] args) {
-        System.out.println(isIsomorphic("egg", "add"));
+        System.out.println(isIsomorphic("badc", "baba"));
     }
 
 
     // Problem answers
-    public static boolean isIsomorphic(String s, String t) {
 
-        return true;
+    /**
+     * Isomorphic strings, <a href="https://leetcode.com/problems/isomorphic-strings/">...</a>
+     * @param s String
+     * @param t String
+     * @return boolean
+     */
+    public static boolean isIsomorphic(String s, String t) {
+        if (s.length() != t.length()) return false;
+        HashMap<Character, Character> isoMap = new HashMap<>();
+        StringBuilder newString = new StringBuilder();
+        for (int i = 0; i < s.length(); i++) {
+            if (isoMap.containsValue(t.charAt(i)) && !isoMap.containsKey(s.charAt(i))) return false;
+            if (!isoMap.containsKey(s.charAt(i))) {
+                isoMap.put(s.charAt(i), t.charAt(i));
+            }
+            newString.append(isoMap.get(s.charAt(i)));
+        }
+        return newString.toString().equalsIgnoreCase(t);
     }
 
     public static String mostCommonWord(String paragraph, String[] banned) {
